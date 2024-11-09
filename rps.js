@@ -3,12 +3,9 @@ const options = ['rock', 'paper', 'scissors'];
 let computerWins = 0;
 let playerWins =  0;
 
-
-
 function getComputerChoice() {
     const randIndex = Math.floor(Math.random() * options.length);
     return options[randIndex];
-
 }
 
 function getPlayerChoice() {
@@ -73,6 +70,8 @@ function playGame() {
         playRound();
     }
     console.log(' ');
+    console.log('Final game score:');
+    console.table({'Computer': computerWins, 'You': playerWins});
     console.log('The Winner is:');
     const winner = computerWins === playerWins 
     ? 'draw' : computerWins > playerWins 
@@ -93,7 +92,4 @@ function playGame() {
     }
 }
 
-
 playGame();
-
-
