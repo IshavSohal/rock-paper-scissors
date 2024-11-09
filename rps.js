@@ -1,6 +1,8 @@
+const numRounds = 5;
 const options = ['rock', 'paper', 'scissors'];
 let computerWins = 0;
 let playerWins =  0;
+
 
 
 function getComputerChoice() {
@@ -35,15 +37,14 @@ function gameResult(computer, player){
 
 function playRound() {
     console.log(' ');
-    console.log('=======');
+    console.log('---------');
     console.log('New Round');
-    console.log('=======');
+    console.log('---------');
     console.log('Game score:');
     console.table({'Computer': computerWins, 'You': playerWins});
     const computerMove = getComputerChoice();
     const playerMove = getPlayerChoice();
     const result = gameResult(computerMove, playerMove);
-
 
     if (result === 'computer'){
         computerWins += 1
@@ -60,22 +61,30 @@ function playRound() {
 
 
 function playGame() {
-    for (let i = 0; i < 5; i++){
+    console.log('==============================');
+    console.log('Welcome to Rock Paper Scissors');
+    console.log('Rules of game: ');
+    console.log('1. Rock beats scissors');
+    console.log('2. Paper beats rock');
+    console.log('3. Scissors beats paper');
+    console.log('Good luck!');
+    console.log('==============================');
+    for (let i = 0; i < numRounds; i++){
         playRound();
     }
     console.log(' ');
     console.log('The Winner is:');
     const winner = computerWins === playerWins 
     ? 'draw' : computerWins > playerWins 
-    ? 'computer' : 'player';
+    ? 'computer' : 'you';
 
     if (winner === 'draw') {
-        console.log('NO ONE');
+        console.log('NO ONE!!!');
     } else{
         console.log(`${winner.toUpperCase()}!!!`);
     }
 
-    if(confirm('Play Again?')){
+    if (confirm('Play Again?')){
         computerWins = 0;
         playerWins = 0;
         playGame()
