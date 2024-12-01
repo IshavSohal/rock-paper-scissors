@@ -3,10 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="rps.js"></script>
+    <title>rps.exe</title>
+    <script src="rps.js" defer></script>
+    <link rel="stylesheet" href="styles.css"> </link>
 </head>
 <body>
+    <h1 id="rpsTitle"> Rock Paper Scissors</h1>
+    <div id="rules">
+        <h3> Rules of the game </h3>
+        <ol>
+            <li> Rock beats scissors</li>
+            <li> Paper beats rock </li>
+            <li> Scissors beats paper </li>
+        </ol>
+    </div>
+
+    <h3> Your move </h3>
+    <div id="choices"> 
+        <button class="choice" id="rock"><img src="./images/Rock.png"/></button>
+        <button class="choice" id="paper"><img src="./images/Paper.png"/></button>
+        <button class="choice" id="scissors"><img src="./images/Scissors.png"/></button>
+    </div>
     
+    <h3> Computer Move </h3>
+    <div id="computerMove"> Do your worst &#128520;  </div>
+
+    <h3> Result </h3>
+    <div id="result"> </div>
+    <button id="playAgain" hidden> Play again? </button>
+
+    <h3>Scoreboard</h3>
+    <table id="scoreboard">
+        <tr>
+            <th>Computer Wins</th>
+            <th>Your Wins</th>
+            <th>Draws</th>
+        </tr>
+        <tr>
+            <td id="computerScore">0</td>
+            <td id="playerScore">0</td>
+            <td id="draws">0</td>
+        </tr>
+    </table>
 </body>
 </html>

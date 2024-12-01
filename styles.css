@@ -1,0 +1,73 @@
+
+html {
+    background-color: antiquewhite;
+    font-family: Garamond, serif;
+    background-color: rgb(7, 174, 174)   ;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#rpsTitle{
+    border-width: 0.5rem;
+    border-color: green;
+    border-style: outset;
+    outline: 0.5rem outset khaki;
+    background-color: rgb(7, 174, 79) ;
+    padding: 20px;
+}
+
+#rules {
+    border-width: 0.5rem;
+    border-color: green;
+    border-style: outset;
+    outline: 0.5rem outset khaki;
+    background-color: brown;
+    padding: 20px;
+    font-size: 20px;
+}
+
+#choices {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    flex-wrap: wrap;
+}
+
+#scoreboard {
+    border: 2px solid black;
+}
+
+#rock {
+    background-color: #2596be;
+}
+
+ #paper {
+    background-color: #ffc454;
+ }
+
+ #scissors {
+    background-color: #d01444;
+ }
+
+.choice{
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 2px solid black;
+    margin-left: 20px;
+}
+
+.choice:hover{
+    border: 2px solid orange;
+}
+
+
+td,th {
+    border: 1px solid black;
+    padding: 8px;
+}

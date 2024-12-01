@@ -3,23 +3,42 @@ const OPTIONS = ["rock", "paper", "scissors"];
 let computerWins = 0;
 let playerWins = 0;
 
-function getComputerChoice() {
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorsButton = document.querySelector("#scissors");
+const restartButton = document.querySelector("#playAgain");
+
+const computerScore = document.querySelector("#computerScore");
+const playerScore = document.querySelector("#playerScore");
+const computerMove = document.querySelector("#computerMove");
+const result = document.querySelector("#result");
+const draws = document.querySelector("#draws");
+
+const buttons = document.querySelectorAll(".choice");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => playRound(button.id));
+});
+
+restartButton.addEventListener("click", () => {
+    // Q; can we bind the variable values to the text content of these elements?
+    computerWins = 0;
+    playerWins = 0;
+    computerScore.innerText = 0;
+    playerScore.innerText = 0;
+    draws.innerText = 0;
+    rockButton.disabled = false;
+    paperButton.disabled = false;
+    scissorsButton.disabled = false;
+    restartButton.hidden = true;
+    computerMove.innerHTML = "Do your worst &#128520;";
+    result.innerText = "";
+});
+
+function getComputerMove() {
     const randIndex = Math.floor(Math.random() * OPTIONS.length);
-    return OPTIONS[randIndex];
-}
-
-function getPlayerChoice() {
-    let playerInput;
-    do {
-        playerInput = prompt("Choose 'rock', 'paper' or 'scissors': ");
-
-        if (!playerInput) {
-            return null;
-        }
-    } while (!OPTIONS.includes(playerInput.toLowerCase()));
-
-    //todo: end the game if the user clicks cancel
-    return playerInput.toLowerCase();
+    const move = OPTIONS[randIndex];
+    computerMove.innerHTML = `<img src="./images/${move.at(0).toUpperCase() + move.slice(1)}.png"/>`;
+    return move;
 }
 
 function gameResult(computer, player) {
@@ -37,71 +56,34 @@ function gameResult(computer, player) {
     }
 }
 
-function playRound() {
-    console.log(" ");
-    console.log("---------");
-    console.log("New Round");
-    console.log("---------");
-    console.log("Game score:");
-    console.table({ Computer: computerWins, You: playerWins });
-    const computerMove = getComputerChoice();
-    const playerMove = getPlayerChoice();
-    if (!playerMove) {
-        return null;
-    }
-    const result = gameResult(computerMove, playerMove);
+function playRound(playerMove, computerMove = getComputerMove()) {
+    const winner = gameResult(computerMove, playerMove);
 
-    if (result === "computer") {
+    if (winner === "computer") {
         computerWins += 1;
-        console.log("You Lost :(");
-        console.log(`${computerMove} beats ${playerMove}`);
-        return "computer";
-    } else if (result === "player") {
+        computerScore.innerText = computerWins;
+        result.innerText = `You Lost :(\n${computerMove} beats ${playerMove}`;
+        if (computerWins === 5) gameOver();
+    } else if (winner === "player") {
         playerWins += 1;
-        console.log("You Won!");
-        console.log(`${playerMove} beats ${computerMove}`);
-        return "player";
+        playerScore.innerText = playerWins;
+        result.innerText = `You Won! \n${playerMove} beats ${computerMove}`;
+        if (playerWins === 5) gameOver();
     } else {
-        console.log("Draw!");
-        return "draw";
+        result.innerText = "Draw???!?!??!";
+        draws.innerText = +draws.innerText + 1;
     }
 }
 
-function playGame() {
-    console.log("==============================");
-    console.log("Welcome to Rock Paper Scissors");
-    console.log("Rules of game: ");
-    console.log("1. Rock beats scissors");
-    console.log("2. Paper beats rock");
-    console.log("3. Scissors beats paper");
-    console.log("Good luck!");
-    console.log("==============================");
-    let res;
-    for (let i = 0; i < NUM_ROUNDS; i++) {
-        res = playRound();
-        if (!res) {
-            break;
-        }
-    }
-    console.log(" ");
-    console.log("Final game score:");
-    console.table({ Computer: computerWins, You: playerWins });
-    console.log("The Winner is:");
+function gameOver() {
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
+    restartButton.removeAttribute("hidden");
     const winner = computerWins === playerWins ? "draw" : computerWins > playerWins ? "computer" : "you";
+    result.innerText = `The winner is: ${winner.toUpperCase()}!!!`;
 
-    if (winner === "draw") {
-        console.log("NO ONE!!!");
-    } else {
-        console.log(`${winner.toUpperCase()}!!!`);
-    }
-
-    if (confirm("Play Again?")) {
-        computerWins = 0;
-        playerWins = 0;
-        playGame();
-    } else {
-        console.log("Have a nice day!");
-    }
+    // disable all buttons
+    // declare winner
+    // display button allowing user to start again
 }
-
-playGame();
